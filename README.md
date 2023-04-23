@@ -34,3 +34,37 @@ Los métodos que utilizaremos suponen que habrá cambios significativos en el re
 Un metodo habitual para perturbar es introducir ruido teniendo en cuenta el rango de valores del atributo.
 
 ## LIME
+Es un método XAI basado en un modelo subrogado. Estos modelos subrogados deben ser modelos de caja blanca faciles de interpretar. En LIME el modelo se entrena para aproximar una predicción individual y las predicciones de su vecindad, obtenidas al perturbar la muestra individual estudiada. Dada una muestra, generaremos una nueva muestra cuyos valores de sus atributos sean 1 o 0. (1=perturbado,0=no perturbado).
+
+Las explicaciones obtenidas con LIME se pueden expresar como:
+![image](https://user-images.githubusercontent.com/72499336/233856273-3ae0bb0a-52bc-4bed-bbe3-ce6cc02ee30d.png)
+
+Donde g es un modelo subrogado de la clase G perteneciente al grupo de modelos interpretables. El componenete omega(g) se usa como regularización para mantener la complejidad de g baja, ya que la alta complejidad se opone a la interpretabilidad. El modelo que se está explicando se denota como f y L determina el rendimineto de g ajustando la localidad definida por pi como una función de medición de proximidad como pix=pi(x,.). Cada muestra de entrenamiento se pondera con la distancia entre la muestra perturbada y la muestra original. La distancia que se suele usar es la distancia coseno.
+
+Como modelo subrogado en este trabajo, se usará la regresión ridge. Una vez entrenado, la explicación será los pesos de la regresión. Asi consideramos dichos pesos como la importancia que cada atributo tiene para la predicción estudiada.
+
+Pseudocódigo LIME:
+![image](https://user-images.githubusercontent.com/72499336/233856520-062bd305-96ab-4fc9-91ed-306ef5bb4339.png)
+
+## SHAP
+Por el momento no resumo nada porque lo más probable es que tiremos por LIME ya que parece que se entiende mejor. Solo si no somos capaces de salir adelante com LIME, utilizaremos SHAP.
+
+## Métricas
+* Identidad: El principio de identidad establece que objetos idénticos debe recibir explicaciones idénticas. Esto estima el nivel de no determinismo intrínseco en el método.
+![image](https://user-images.githubusercontent.com/72499336/233856717-2565ecd1-4959-485d-8f62-5da5a9492119.png)
+donde x son muestras, d es una función de distancia y e son vectores de explicación.
+* Separabilidad: Objetos no idénticos no pueden tener explicaciones idénticas
+![image](https://user-images.githubusercontent.com/72499336/233856790-b11abf8c-e827-4ece-b9cf-d0ddbf7530bd.png)
+Si una característica no es necesaria para la predicción, dos muestras que solo se diferencian en esa característica, tendrán la misma predicción. En este caso, se podría proporcionar la misma explicación, aunque las muestras sean diferentes. Esta métrica supone que todas las características tendrán un nivel mínimo de importancia en las predicciones.
+* Estabilidad: Objetos similares deben tener explicaciones similares. un m´etodo de explicaci´on solo debe devolver explicaciones similares para objetos ligeramente diferentes.  correlación de Spearman ρ:
+![image](https://user-images.githubusercontent.com/72499336/233857044-a7fd0b11-6f83-4204-ac74-4c5d8f68b0a2.png)
+* Selectividad: La eliminación de variables relevantes debe afectar negativamente a la predicción. Para calcular la selectividad, las características se ordenan de más a menos relevante. Una por una se eliminan, dejandolas a 0, y se obtienen los errores residuales de obtener el área bajo la curva.
+* Coherencia: Se calcula la diferencia entre el error de predicción sobre la señal original y el error de predicción de una nueva señal donde se eliminanan las características no importantes:
+![image](https://user-images.githubusercontent.com/72499336/233857142-07db69d8-2186-4c1e-925b-065a32170dba.png)
+* Completitud: Evalúa el procentaje de error de explicación con respecto al error de predicción:
+![image](https://user-images.githubusercontent.com/72499336/233857183-3777aca5-f6d4-4ad1-a45e-b64a3a4f86ac.png)
+* Congruencia: La desviación estándar de la coherencia proporciona el proxy de congruencia. Esta métrica ayuda a capturar la variabilidad de la coherencia:
+![image](https://user-images.githubusercontent.com/72499336/233857229-cf3401cd-f8e7-482e-81b7-321b7f42d604.png)
+![image](https://user-images.githubusercontent.com/72499336/233857242-de31dc20-14db-47f5-a5c0-6407b3df3245.png)
+
+
