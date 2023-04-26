@@ -5,7 +5,7 @@ Utilizaremos este repositorio para gestionar todos los recursos necesarios para 
 * Memoria, con las explicación de los métodos aplicados, el estado del arte, los resultados y conclusiones.
 * Código.
 
-# Trabajo a realizar:
+## Trabajo a realizar:
 1. Implementar un método XAI
 2. Implementar métricas. (Se recomienda usar numpy y spicy)
 3. Seleccionar 2 conjuntos de datos.
