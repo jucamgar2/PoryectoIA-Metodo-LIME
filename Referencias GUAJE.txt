@@ -1,0 +1,5 @@
+Aprendiendo a generar números aleatorios:
+https://www.techiedelight.com/es/generate-random-numbers-specified-range-python/
+
+Aprendinedo a utilizar el operador ternario de python:
+https://python-intermedio.readthedocs.io/es/latest/ternary_operators.html
