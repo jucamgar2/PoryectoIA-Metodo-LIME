@@ -3,3 +3,6 @@ https://www.techiedelight.com/es/generate-random-numbers-specified-range-python/
 
 Aprendinedo a utilizar el operador ternario de python:
 https://python-intermedio.readthedocs.io/es/latest/ternary_operators.html
+
+RandomForest
+https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
