@@ -6,3 +6,6 @@ https://python-intermedio.readthedocs.io/es/latest/ternary_operators.html
 
 RandomForest
 https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+
+Verbose
+https://stackoverflow.com/questions/47902295/what-is-the-use-of-verbose-in-keras-while-validating-the-model
